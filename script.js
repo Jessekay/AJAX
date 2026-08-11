@@ -51,6 +51,12 @@ Instructions:
 
     Your code goes here!
      */
+    return get(url).then(function(response) {
+      if (!response.ok) {
+        throw Error(response.statusText ? response.statusText : 'Unknown network error')
+      }
+      return response.json();
+    });
   }
 
   window.addEventListener('WebComponentsReady', function() {
