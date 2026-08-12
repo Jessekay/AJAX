@@ -11,7 +11,7 @@ function delay(ms) {
   },5000);
 }
 
-delay(5000).then(
+delay(4000).then(
   (data) => console.log(data),
   (error) => console.error(error)
 );
