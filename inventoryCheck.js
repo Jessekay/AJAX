@@ -22,13 +22,13 @@ function checkInventory(itemId, quantity) {
     });
   }).then((data) => {
     const totalCost = data.quantity * data.pricePerUnit;
-    return `Order confirmed for Item [itemId]! Total cost: ${totalCost}`
+    return `Order confirmed for Item ${data.itemId}! Total cost: ${totalCost}`
     return transformedData;
   }).catch((err) => {
     console.error(err);
-    return fallbackData;
+    return "Order placed on back order (No immediate charge)";
   }).then((finalMessage) => {
-    console.log(finalMessage);
+    console.log("Final message:", finalMessage);
   })
 }
 
