@@ -32,8 +32,8 @@ async function checkout(cardToken, amount) {
     const invoice = await generateInvoice(payment.paymentId);
     console.log(`Invoice ready: ${invoice.invoiceNum} at ${invoice.downloadUrl}`);
 
-  } catch (error) {
-    console.error(`Checkout failed: ${error}`);
+  } catch (err) {
+    console.error(`Checkout failed: ${err}`);
   }
 }
 
