@@ -37,4 +37,4 @@ async function checkout(cardToken, amount) {
   }
 }
 
-checkout("TOKEN-1234", 150)
+checkout("", 150)
