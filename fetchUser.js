@@ -22,7 +22,6 @@ function fetchUserPosts(role) {
   });
 }
 
-// Convert this function to async / await with try...catch
 async function loadDashboard(userId) {
   try {
     const user = await fetchUser(userId)
