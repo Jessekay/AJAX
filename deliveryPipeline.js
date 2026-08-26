@@ -1,4 +1,3 @@
-// Legacy Callback Function (DO NOT EDIT)
 function verifyCustomerLegacy(customerId, callback) {
   setTimeout(() => {
     if (!customerId) {
@@ -11,7 +10,6 @@ function verifyCustomerLegacy(customerId, callback) {
   }, 500);
 }
 
-// Existing Promise-based functions (DO NOT EDIT)
 function processPayment(amount) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -50,7 +48,7 @@ function verifyCustomer(customerId) {
   })
 }
 
-verifyCustomer("CUST-100")
+verifyCustomer()
 .then((customer) => {
   console.log("Customer is verified:", customer.id);
   return processPayment(50);
