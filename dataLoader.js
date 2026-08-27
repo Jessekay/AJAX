@@ -20,10 +20,19 @@ function getAccountSettings() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log("Fetched account settings");
-      const success = true; // try flipping this to false later
+      const success = false;
       if (success) resolve({ theme: "dark", language: "en" });
       else reject(new Error("Failed to load settings"));
     }, 700);
   });
 }
+
+Promise.all([getUserProfile(), getNotifications(), getAccountSettings()])
+.then((results) => {
+  const [profile, notifications, settings] = results;
+  console.log('Profile loaded', profile, notifications, settings);
+})
+.catch((err) => {
+  console.error("Failed to load", err.message);
+})
 
