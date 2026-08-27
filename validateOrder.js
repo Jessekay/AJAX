@@ -47,8 +47,8 @@ function createOrder(finalPrice) {
 }
 
 validateCart("cart-001")
-.then((items) => { calculateTotal(items) })
-.then((total) => { applyDiscount(total, "SAVE10") })
-.then((finalPrice) => { createOrder(finalPrice) }).catch((err) => { console.error("Failed", err) })
+.then((items) => calculateTotal(items))
+.then((total) => applyDiscount(total, "SAVE10") )
+.then((finalPrice) => createOrder(finalPrice)).catch((err) => { console.error("Failed", err) })
 .finally(() => {console.log("Process finished");
 });
