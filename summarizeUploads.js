@@ -14,3 +14,14 @@ async function summarizeUploads(uploads) {
     failed: failed
   };
 }
+
+const uploads = [
+  new Promise(resolve => setTimeout(() => resolve("vacation.jpg"), 300)),
+  new Promise((_, reject) => setTimeout(() => reject(new Error("File too large")), 100)),
+  new Promise(resolve => setTimeout(() => resolve("beach.png"), 200)),
+  new Promise((_, reject) => setTimeout(() => reject(new Error("Unsupported format")), 400)),
+];
+
+summarizeUploads(uploads).then(summary => {
+  console.log(summary);
+});
