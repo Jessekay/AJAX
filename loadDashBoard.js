@@ -18,4 +18,4 @@ async function loadDashboard() {
   }
 }
 
-loadDashboard().then(console.log)
+loadDashboard().then(result => console.log('Final result', result));
