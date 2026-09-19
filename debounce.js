@@ -3,14 +3,19 @@ const defaultText = document.getElementById('default');
 const debounceText = document.getElementById('debounce');
 const throttleText = document.getElementById('throttle');
 
-input.addEventListener("input", e => {
-  defaultText.textContent = e.target.value;
+const updateDebounceText = debounce(text => {
+  debounceText.textContent = text;
 })
 
-const updatedText = debounce((text) => {
-  defaultText.textContent = text;
+input.addEventListener("input", e => {
+  defaultText.textContent = e.target.value;
+  updateDebounceText(e.target.value)
 })
 
 function debounce(cb, delay = 1000) {
-
+  return (...args) => {
+    setTimeout(() => {
+      cb(...args)
+    }, delay)
+  }
 }
