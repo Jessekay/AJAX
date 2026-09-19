@@ -13,8 +13,11 @@ input.addEventListener("input", e => {
 })
 
 function debounce(cb, delay = 1000) {
+  let timeout
   return (...args) => {
-    setTimeout(() => {
+  clearTimeout(timeout)
+
+  timeout = setTimeout(() => {
       cb(...args)
     }, delay)
   }
