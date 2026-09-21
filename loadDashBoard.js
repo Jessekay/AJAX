@@ -1,21 +1,37 @@
-async function loadDashboard() {
+async function fetchUrl(url) {
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`Request failed: ${res.status} ${res.statusText} (${url})`);
+  }
+  return res.json();
+}
+
+async function fetchAllUrls(urls) {
+  return Promise.all(urls.map(fetchUrl))
+}
+
+async function getUserDashboard() {
   try {
-    const [user, todos] = await Promise.all([
-    fetch('https://jsonplaceholder.typicode.com/api/user').then(res => {
-      console.log(res.status, res.ok);
-      res.json()
-    }),
-    fetch('https://jsonplaceholder.typicode.com/api/todos').then(res => {
-      console.log(res.status, res.ok);
-      res.json()
-    })
+    const [user, posts, todos] = await fetchAllUrls([
+    'https://jsonplaceholder.typicode.com/users/1',
+    'https://jsonplaceholder.typicode.com/posts?userId=1',
+    'https://jsonplaceholder.typicode.com/todos?userId=1'
   ]);
-    return {
-      user, todos 
-    };
+
+  return { user, posts, todos }
+
   } catch (error) {
-    console.error(error)
+    console.error('Failed to load the dashboard', error);
+    throw error;
   }
 }
 
-loadDashboard().then(result => console.log('Final result', result));
+getUserDashboard().then(({user, posts, todos}) => {
+  console.log('User:', user.name, `${user.email}`);
+  console.log('Posts:', posts.length);
+  console.log('Todos:', todos.length);
+})
+.catch(error => console.log('Failed', error.message));
+
+fetchAllUrls(['https://jsonplaceholder.typicode.com/users/1', 'https://jsonplaceholder.typicode.com/posts?userId=1', 'https://jsonplaceholder.typicode.com/todos?userId=1']);
