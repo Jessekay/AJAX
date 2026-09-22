@@ -1,5 +1,5 @@
 async function fetchUrl(url) {
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(5000)});
 
   if (!res.ok) {
     throw new Error(`Request failed: ${res.status} ${res.statusText} (${url})`);
