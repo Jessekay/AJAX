@@ -27,7 +27,7 @@ async function getGithubDashboard() {
 
 getGithubDashboard()
 .then(({profile, repo, followers}) => {
-  console.log('Profile:', profile);
-  console.log('Repositories:', repo.length);
+  console.log('Profile:', profile.name, profile.bio ?? 'No Bio');
+  console.log('Repositories:', repo.sort((a, b) => b.stargazers_count - a.stargazers_count).map(r => r.name));
   console.log('Followers:', followers.length);
 }).catch(error => console.log('Failed', error.message));
