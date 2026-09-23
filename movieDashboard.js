@@ -1,5 +1,5 @@
 async function fetchMovie(url) {
-  const res = await fetch(url, { signal: AbortSignal(5000) });
+  const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
 
   if (!res.ok) {
     throw new Error(`Request failed ${res.status} ${res.statusText} ${url}`)
@@ -18,9 +18,16 @@ async function getMovieData() {
       'https://jsonplaceholder.typicode.com/albums/1/photos',
       'https://jsonplaceholder.typicode.com/comments?postId=1'
     ])
+
+    return { movie, scenes, reviews }
   } catch (error) {
     console.error('Failed to load the data', error);
     throw error;
   }
 }
 
+getMovieData().then(({movie, scenes, review}) => {
+  console.log('Movie:', movie.name);
+  console.log('Scenes:', scenes);
+  console.log('Reviews:', review);
+}).catch(error => console.log('Failed', error.message));
