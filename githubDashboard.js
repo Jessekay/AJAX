@@ -1,10 +1,13 @@
 async function fetchDashboardData(url) {
   const res = await fetch(url, { signal: AbortSignal.timeout(5000) })
-
   if (!res.ok) {
-    throw new Error(`Request failed: ${res.status} ${res.statusText} ${url}`);
+    if (res.status === 403) {
+      throw new Error('Rate limited by GitHub API')
+    } else {
+      throw new Error(`Request failed: ${res.status} ${res.statusText} ${url}`)
+    }
   }
-    return res.json();
+  return res.json()
 }
 
 async function fetchGitStats(urls) {
@@ -28,6 +31,7 @@ async function getGithubDashboard() {
 getGithubDashboard()
 .then(({profile, repo, followers}) => {
   console.log('Profile:', profile.name, profile.bio ?? 'No Bio');
-  console.log('Repositories:', repo.sort((a, b) => b.stargazers_count - a.stargazers_count).map(r => r.name));
+  console.log('Repositories:', repo.sort((a, b) => b.stargazers_count - a.stargazers_count).map(r => r.name
+  ));
   console.log('Followers:', followers.length);
 }).catch(error => console.log('Failed', error.message));
