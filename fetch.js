@@ -1,6 +1,6 @@
 async function fetchData(id) {
   const url = `https://jsonplaceholder.typicode.com/users/${id}`
-  const res = await fetch(url)
+  const res = await fetch(url, {signal: AbortSignal.timeout(5000)})
 
   if (!res.ok) {
     throw new Error(`Request Filed! ${res.status} ${res.statusText}`)
