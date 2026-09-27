@@ -14,8 +14,6 @@ async function pingWithFailover(primaryUrl, backupUrls, timeoutMs) {
     setTimeout(() => reject(new Error('All servers unreachable')), timeoutMs)
   });
 
-
-
   try {
     const res = await Promise.race([...fetchPromises, timeoutPromise]);
     return await res.json();
