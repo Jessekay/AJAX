@@ -4,7 +4,7 @@ async function fetchFastest(urls, timeoutMs) {
     return res;
   }));
 
-  const timeoutPromise = new Promise((_, reject) => 
+  const timeoutPromise = new Promise((_, reject) =>
     setTimeout(() => reject(new Error('All mirrors timed out')), timeoutMs)
 );
 
