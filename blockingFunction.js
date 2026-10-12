@@ -1,5 +1,5 @@
 function task(message) {
-  let n = 10000000000;
+  let n = 100000;
 
   while (n > 0) {
     n--;
