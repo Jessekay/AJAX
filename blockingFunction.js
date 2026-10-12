@@ -8,6 +8,6 @@ function task(message) {
   
 }
 console.log('Start script');
-task('Call an API');
+task('Fetch an API');
 console.log('Done!');
 
